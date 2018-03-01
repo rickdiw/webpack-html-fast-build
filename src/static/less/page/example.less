@@ -1,0 +1,30 @@
+@charset "utf-8";
+/**
+ * Created by huangyh(黄永号) on 2017/12/5.
+ */
+
+@import "../core/global";
+
+.panel {
+  margin-bottom: @padding-medium;
+  border: 1px solid @border-color-base;
+  border-radius: @border-radius-base;
+  transition: all 0.5s;
+
+  .panel-header {
+    border-bottom: 1px solid @border-color-base;
+    padding: 0 @padding-medium;
+    line-height: 40px;
+    background: #f5f5f5;
+  }
+
+  .panel-body {
+    padding: @padding-medium;
+  }
+}
+
+.test {
+  padding: @padding-medium;
+  color: #fff;
+  background: url("../../images/bg_1.jpg");
+}

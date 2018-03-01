@@ -1,0 +1,391 @@
+@charset "utf-8";
+/**
+ * Created by huangyh(黄永号) on 2017/12/5.
+ */
+
+.clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    display: table;
+    font-size: 0;
+    content: " ";
+    clear: both;
+  }
+}
+
+.fl {
+  float: left !important;
+}
+
+.fr {
+  float: right !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+.block {
+  display: block !important;
+}
+
+.vertical-middle {
+  vertical-align: middle !important;
+}
+
+.vertical-top {
+  vertical-align: top !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.pad {
+  padding: @padding-base !important;
+}
+
+.pad-sm {
+  padding: @padding-small !important;
+}
+
+.pad-md {
+  padding: @padding-medium !important;
+}
+
+.pad-lg {
+  padding: @padding-large !important;
+}
+
+.pad-t {
+  padding-top: @padding-base !important;
+}
+
+.pad-t-sm {
+  padding-top: @padding-small !important;
+}
+
+.pad-t-md {
+  padding-top: @padding-medium !important;
+}
+
+.pad-t-lg {
+  padding-top: @padding-large !important;
+}
+
+.pad-r {
+  padding-right: @padding-base !important;
+}
+
+.pad-r-sm {
+  padding-right: @padding-small !important;
+}
+
+.pad-r-md {
+  padding-right: @padding-medium !important;
+}
+
+.pad-r-lg {
+  padding-right: @padding-large !important;
+}
+
+.pad-b {
+  padding-bottom: @padding-base !important;
+}
+
+.pad-b-sm {
+  padding-bottom: @padding-small !important;
+}
+
+.pad-b-md {
+  padding-bottom: @padding-medium !important;
+}
+
+.pad-b-lg {
+  padding-bottom: @padding-large !important;
+}
+
+.pad-l {
+  padding-left: @padding-base !important;
+}
+
+.pad-l-sm {
+  padding-left: @padding-small !important;
+}
+
+.pad-l-md {
+  padding-left: @padding-medium !important;
+}
+
+.pad-l-lg {
+  padding-left: @padding-large !important;
+}
+
+.mrg {
+  margin: @padding-base !important;
+}
+
+.mrg-sm {
+  margin: @padding-small !important;
+}
+
+.mrg-md {
+  margin: @padding-medium !important;
+}
+
+.mrg-lg {
+  margin: @padding-large !important;
+}
+
+.mrg-t {
+  margin-top: @padding-base !important;
+}
+
+.mrg-t-sm {
+  margin-top: @padding-small !important;
+}
+
+.mrg-t-md {
+  margin-top: @padding-medium !important;
+}
+
+.mrg-t-lg {
+  margin-top: @padding-large !important;
+}
+
+.mrg-r {
+  margin-right: @padding-base !important;
+}
+
+.mrg-r-sm {
+  margin-right: @padding-small !important;
+}
+
+.mrg-r-md {
+  margin-right: @padding-medium !important;
+}
+
+.mrg-r-lg {
+  margin-right: @padding-large !important;
+}
+
+.mrg-b {
+  margin-bottom: @padding-base !important;
+}
+
+.mrg-b-sm {
+  margin-bottom: @padding-small !important;
+}
+
+.mrg-b-md {
+  margin-bottom: @padding-medium !important;
+}
+
+.mrg-b-lg {
+  margin-bottom: @padding-large !important;
+}
+
+.mrg-l {
+  margin-left: @padding-base !important;
+}
+
+.mrg-l-sm {
+  margin-left: @padding-small !important;
+}
+
+.mrg-l-md {
+  margin-left: @padding-medium !important;
+}
+
+.mrg-l-lg {
+  margin-bottom: @padding-large !important;
+}
+
+.margin-horizontal-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden() {
+  display: none !important;
+}
+
+.hidden {
+  .hidden();
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.img-responsive {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  margin: auto;
+}
+
+.img-line-responsive {
+  display: inline;
+  height: auto;
+  max-width: 100%;
+}
+
+.box-shadow(@value) {
+  box-shadow: @value;
+  /*-webkit-box-shadow:@value;
+  -moz-box-shadow:@value;
+  -o-box-shadow:@value;
+  box-shadow:@value;*/
+}
+
+.opacity(@value) {
+  @alpha: @value * 100;
+  opacity: @value;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=@alpha);
+  filter: alpha(opacity=@alpha);
+}
+
+.bfc() {
+  overflow: hidden;
+}
+
+//快捷設置
+.border(@borderWidth: 1px, @borderStyle: solid, @borderColor: @border-color-base) {
+  border: @borderWidth @borderStyle @borderColor;
+}
+
+//正方形
+.square-box(@size: 16px) {
+  width: @size;
+  height: @size;
+}
+
+//圓角
+.radius(@radius: @border-radius-base) {
+  border-radius: @radius;
+}
+
+//行高與高度一致
+.same-height(@height) {
+  height: @height;
+  line-height: @height;
+}
+
+//设置定位位置
+.position-set(@set) {
+  @top: extract(@set, 1);
+  @right: extract(@set, 2);
+  @bottom: extract(@set, 3);
+  @left: extract(@set, 4);
+
+  & when (isnumber(@top)), (@top = "auto") {
+    top: @top;
+  }
+  & when (isnumber(@right)), (@right = "auto") {
+    right: @right;
+  }
+  & when (isnumber(@bottom)), (@bottom = "auto") {
+    bottom: @bottom;
+  }
+  & when (isnumber(@left)), (@left = "auto") {
+    left: @left;
+  }
+}
+
+.layout-absolute(@set:auto auto auto auto, @zIndex: 2) {
+  position: absolute;
+  .position-set(@set);
+  z-index: @zIndex;
+}
+
+.layout-fixed(@set:auto auto auto auto, @zIndex: 2) {
+  position: fixed;
+  .position-set(@set);
+  z-index: @zIndex;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+//xs 以上hidden
+.hidden-xs {
+  @media (min-width: @screen-xs-min) {
+    .hidden();
+  }
+}
+
+//sm 以上hidden
+.hidden-sm {
+  @media (min-width: @screen-sm-min) {
+    .hidden();
+  }
+}
+
+//md 以上hidden
+.hidden-md {
+  @media (min-width: @screen-sm-min) {
+    .hidden();
+  }
+}
+
+//lg 以上hidden
+.hidden-sm {
+  @media (min-width: @screen-sm-min) {
+    .hidden();
+  }
+}
+
+//显示
+.visible() {
+  display: initial !important;
+}
+
+.visible {
+  .visible();
+}
+
+//xs 以上visible
+.visible-xs {
+  @media (min-width: @screen-xs-min) {
+    .visible();
+  }
+}
+
+//sm 以上visible
+.visible-sm {
+  @media (min-width: @screen-sm-min) {
+    .visible();
+  }
+}
+
+//md 以上visible
+.visible-md {
+  @media (min-width: @screen-sm-min) {
+    .visible();
+  }
+}
+
+//lg 以上visible
+.visible-sm {
+  @media (min-width: @screen-sm-min) {
+    .visible();
+  }
+}
