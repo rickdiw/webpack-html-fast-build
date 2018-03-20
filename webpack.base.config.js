@@ -8,8 +8,6 @@ let webpack = require("webpack");
 let ExtractTextPlugin = require("extract-text-webpack-plugin");//将你的行内样式提取到单独的css文件里，
 let SpritesmithPlugin = require("webpack-spritesmith"); //雪碧图
 
-let {config} = require("./config.js");
-
 let webpackConfig = {
     entry: { //配置入口文件，有几个写几个
         index: "./src/source/index.js",
@@ -27,19 +25,12 @@ let webpackConfig = {
     module: {
         loaders: [
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader!postcss-loader"
-                })
-            },
-            {
-                test: /\.less$/,
+                test: /\.(css|less)$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: "css-loader!postcss-loader!less-loader"
                 })
-            },
+            },            
             {
                 test: /\.js$/,
                 loader: "babel-loader",

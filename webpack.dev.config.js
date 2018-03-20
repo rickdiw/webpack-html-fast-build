@@ -10,15 +10,15 @@ let HtmlWebpackPlugin = require("html-webpack-plugin"); //html模板生成器
 let CleanPlugin = require("clean-webpack-plugin"); // 文件夹清除工具
 let merge = require("webpack-merge");
 
+let utils = require("./utils.js");
 let baseWebpackConfig = require("./webpack.base.config.js");
-let {config, entries} = require("./config.js");
-let {dev} = config;
+let config = require("./config.js");
 
 let webpackDevConfig = merge(baseWebpackConfig, {
     output: {
-        path: path.join(__dirname, dev.dir), //打包后生成的目录
-        //publicPath: "./",
-        filename: "static/js/[name].js"	//根据对应入口名称，生成对应js名称
+        path: config.dev.assetsRoot, //打包后生成的目录
+        filename: utils.assetsPath("js/[name].js"),	//根据对应入口名称，生成对应js名称
+        publicPath: config.dev.assetsPublicPath
     },
     module: {
         loaders: [
@@ -30,52 +30,44 @@ let webpackDevConfig = merge(baseWebpackConfig, {
                 test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: "file-loader",
                 options: {
-                    name: "static/fonts/[name].[ext]",
-                    publicPath: "../../"
+                    name: utils.assetsPath("fonts/[name].[ext]")
                 }
             },
-            // css中图片路径
+            // 图片路径
             {
                 test: /\.(png|jpg|gif)$/i,
                 loader: "url-loader",
-                exclude: /img/,
                 options: {
                     limit: 30720, //30720 30kb 图片转base64。设置图片大小，小于此数则转换。
-                    name: "static/images/[name].[ext]",
-                    publicPath: "../../"
-                }
-            },
-            //html 图片路径
-            {
-                test: /\.(png|jpg|gif)$/i,
-                loader: "url-loader",
-                exclude: /images/,
-                options: {
-                    limit: 30720, //30720 30kb 图片转base64。设置图片大小，小于此数则转换。
-                    name: "static/img/[name].[ext]",
-                    publicPath: "./"
+                    name: utils.assetsPath("images/[name].[ext]")
                 }
             }
         ]
     },
     // 在配置中添加插件
     plugins: [
-        new CleanPlugin([dev.dir]),// 清空目录文件夹
-        new ExtractTextPlugin("static/css/[name].css"), //提取CSS行内样式，转化为link引入
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"development"'
+            }
+        }),
+        new CleanPlugin([config.dev.assetsRoot]),// 清空目录文件夹
+        new ExtractTextPlugin(utils.assetsPath("css/[name].css")), //提取CSS行内样式，转化为link引入
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     ],
     devServer:{
         contentBase: "./",
-        port: dev.port,
+        port: config.dev.port,
 		historyApiFallback: true,
         inline: true,
         hot: false
     }
 });
 
-for (let pro in entries) {
-    /*console.log(`key: ${pro}, value: ${entries[pro]}`);*/
+let entries = utils.getEntries("./src/*.html");
+
+for (let pro in entries) {   
     let conf = {
         filename: pro + ".html", //生成的html存放路径，相对于path
         template: entries[pro],
