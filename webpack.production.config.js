@@ -17,7 +17,7 @@ let config = require("./config.js");
 let webpackPropConfig = merge(baseWebpackConfig, {
     output: {
         path: config.build.assetsRoot, //打包后生成的目录
-        filename: utils.assetsPath("js/[name].js"),	//根据对应入口名称，生成对应js名称
+        filename: utils.assetsPath("js/[name].[hash:6].js"),	//根据对应入口名称，生成对应js名称
         chunkFilename: utils.assetsPath("js/[id].chunk.js"),
         publicPath: config.build.assetsPublicPath
     },
